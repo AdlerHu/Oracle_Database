@@ -1,2 +1,17 @@
 Install Oracle Database 19c on Oracle Linux 7.9
 
+Install preinstall
+
+Install Database
+  Set Up Software Only
+  
+Environment Viriable
+
+Create Listener
+  netca
+  
+Create CDB
+  dbca
+
+Create PDBs
+  create pluggable database PDB2 admin user suq identified by suq file_name_convert=('pdbseed','PDB2');
