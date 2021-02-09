@@ -3,9 +3,12 @@ Install Oracle Database 19c on Oracle Linux 7.9
 Install preinstall
 
 Install Database
+  unzip 
+  ./runInstaller
   Set Up Software Only
   
 Environment Viriable
+  vi /home/oracle/.bash_profile
 
 Create Listener
   netca
