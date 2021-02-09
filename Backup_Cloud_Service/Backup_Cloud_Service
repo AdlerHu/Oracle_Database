@@ -1,1 +1,3 @@
 
+Update system time
+  sudo ntpdate time.stdtime.gov.tw
