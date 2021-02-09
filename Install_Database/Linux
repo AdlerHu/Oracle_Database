@@ -1,0 +1,28 @@
+
+Install Oracle Database 19c on Oracle Linux 7.9
+
+
+Install preinstall
+  yum localinstall oracle-database-preinstall-19c.x86_64
+
+Install Database
+  unzip 
+  ./runInstaller
+  Set Up Software Only
+  
+Environment Viriable
+  vi /home/oracle/.bash_profile
+    export ORACLE_BASE=/tmp/oracle
+    export ORACLE_HOME=/tmp/oracle/database/dbhome
+    export ORACLE_SID=orcl
+
+    PATH=$PATH:$HOME/.local/bin:$HOME/bin:$ORACLE_HOME/bin
+
+Create Listener
+  netca
+  
+Create CDB
+  dbca
+
+Create PDBs
+  create pluggable database PDB2 admin user suq identified by suq file_name_convert=('pdbseed','PDB2');
