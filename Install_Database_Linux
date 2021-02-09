@@ -1,6 +1,8 @@
 Install Oracle Database 19c on Oracle Linux 7.9
 
+
 Install preinstall
+  yum localinstall oracle-database-preinstall-19c.x86_64
 
 Install Database
   unzip 
