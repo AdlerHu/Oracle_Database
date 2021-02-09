@@ -9,6 +9,11 @@ Install Database
   
 Environment Viriable
   vi /home/oracle/.bash_profile
+    export ORACLE_BASE=/tmp/oracle
+    export ORACLE_HOME=/tmp/oracle/database/dbhome
+    export ORACLE_SID=orcl
+
+    PATH=$PATH:$HOME/.local/bin:$HOME/bin:$ORACLE_HOME/bin
 
 Create Listener
   netca
