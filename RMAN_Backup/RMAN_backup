@@ -1,0 +1,17 @@
+RMAN target /
+
+  CONFIGURE CHANNEL DEVICE TYPE DISK FORMAT '/backup/rman/full_%u_%s_%p';
+  CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 2 DAYS;
+  BACKUP AS BACKUPSET TAG 'Adler_202102171705' Database;
+  list backup summary;
+
+SQL
+  shutdown immediate;
+  startup mount;
+
+RMAN
+  restore database from tag 'Adler_202102171705';
+  recover database;
+  
+SQL
+  alter database open;
