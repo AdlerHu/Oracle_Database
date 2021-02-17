@@ -27,9 +27,9 @@ Create CDB
 Create PDBs
   create pluggable database PDB2 admin user suq identified by suq file_name_convert=('pdbseed','PDB2');
   
-
 Auto-open PDBs on startup database
-  SQL> create trigger OPEN_PDBs after startup on database --创建触发器:指定pdb和实例同时开启
+  # 创建触发器:指定pdb和实例同时开启
+  SQL> create trigger OPEN_PDBs after startup on database 
     2  begin
     3  execute immediate 'alter pluggable database all open';
     4  end;
