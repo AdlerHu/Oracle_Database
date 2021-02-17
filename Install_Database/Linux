@@ -34,3 +34,25 @@ Auto-open PDBs on startup database
     3  execute immediate 'alter pluggable database all open';
     4  end;
     5  /
+
+Create local user in PDB
+  SQL
+    alter session set container=pdb1;  
+    create user username identified by password;
+    (grant sysdba to username container=pdb1;)
+    grant create session to username;
+
+connect into PDB with local user
+  Linux
+    vi $ORACLE_HOME/network/admin/tnsnames.ora
+        Add
+        PDB1 =
+          (DESCRIPTION =
+            (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521))
+            (CONNECT_DATA =
+              (SERVER = DEDICATED)
+              (SERVICE_NAME = PDB1)
+            )
+          )
+    
+    sqlplus username/password@pdb1 as sysdba
