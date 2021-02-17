@@ -1,4 +1,4 @@
-RMAN target /
+rman target /
 
   CONFIGURE CHANNEL DEVICE TYPE DISK FORMAT '/backup/rman/full_%u_%s_%p';
   CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 2 DAYS;
