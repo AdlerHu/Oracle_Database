@@ -9,7 +9,20 @@ Install Database
   unzip 
   ./runInstaller
   Set Up Software Only
-  
+
+  If No GUI
+    install xorg-x11-xauth
+    sudo vi /etc/ssh/sshd_config
+      # AddressFamily any
+      AddressFamily inet
+
+      AllowTcpForwarding yes
+      X11Forwarding yes
+      X11DisplayOffset 10
+      X11UseLocalhost yes
+    
+    ssh connect with MobaXterm
+
 Environment Viriable
   vi /home/oracle/.bash_profile
     export ORACLE_BASE=/tmp/oracle
