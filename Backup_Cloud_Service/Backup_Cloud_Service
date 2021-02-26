@@ -1,13 +1,56 @@
 
 Update system time
   sudo ntpdate time.stdtime.gov.tw
+
+Prepare On Cloud
+  Create Compartment
+  Create Group
+  Create Policy
+  Create User
+  Create Object Storage bucket
+
+On Host
+  Install Cloud Backup Module
   
-Create Compartment
-Create Group
-Create Policy
-Create User
-Create Object Storage bucket
+  RMAN
+    Configure
+      CONFIGURE CONTROLFILE AUTOBACKUP ON;
+      CONFIGURE CHANNEL DEVICE TYPE sbt PARMS='SBT_LIBRARY=/tmp/oracle/database/dbhome/lib/libopc.so, SBT_PARMS=(OPC_PFILE=/tmp/oracle/database/dbhome/dbs/opcorcl.ora)';
+      CONFIGURE COMPRESSION ALGORITHM 'MEDIUM';    
+      CONFIGURE DEVICE TYPE sbt BACKUP TYPE TO COMPRESSED BACKUPSET;
+    
+    Backup
+      SET ENCRYPTION ON IDENTIFIED BY 'my_pswd' ONLY;
+      BACKUP DEVICE TYPE sbt DATABASE;
+    
+    Restore
+      SET DECRYPTION IDENTIFIED BY 'my_pswd';
+      RESTORE DATABASE;
+      RECOVER DATABASE;
+      
+    Restoring to a New Database Host
+        rm -f /tmp/oracle/oradata/ORCL/*.log
+      RMAN
+        STARTUP NOMOUNT;
+        SET DECRYPTION IDENTIFIED BY 'my_bkup_pwd';
+        SET DBID=       ;
+        run {
+        ALLOCATE CHANNEL t1 DEVICE TYPE sbt PARMS 'SBT_LIBRARY=libopc.so ENV=(OPC_PFILE=/tmp/oracle/database/dbhome/dbs/opcorcl.ora)';
+        RESTORE SPFILE TO PFILE '/tmp/oracle/database/dbhome/dbs/initorcl.ora' FROM 'c-1593232515-20210226-00';
+        }
 
-Install Cloud Backup Module on host
+        run {
+        ALLOCATE CHANNEL t1 DEVICE TYPE sbt PARMS 'SBT_LIBRARY=libopc.so ENV=(OPC_PFILE=/tmp/oracle/database/dbhome/dbs/opcorcl.ora)';
+        RESTORE CONTROLFILE FROM 'c-1593232515-20210226-00';
+        }
+      
+        alter database mount;
+        restore database device type sbt;  
+        recover database until available redo;
 
-
+      SQL
+        alter system set "_allow_resetlogs_corruption"=true scope=spfile;
+        recover database using backup controlfile until cancel;
+        startup force;
+        alter database open resetlogs;
+           
