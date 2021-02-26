@@ -1,3 +1,13 @@
 
 Update system time
   sudo ntpdate time.stdtime.gov.tw
+  
+Create Compartment
+Create Group
+Create Policy
+Create User
+Create Object Storage bucket
+
+Install Cloud Backup Module on host
+
+
