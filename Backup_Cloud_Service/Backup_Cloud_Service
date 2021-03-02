@@ -41,7 +41,7 @@ On Host
         alter database mount;
         }      
         
-        restore database device type sbt;  
+        restore database device type sbt from tag '';  
         recover database until available redo;
         alter database open resetlogs;
 
