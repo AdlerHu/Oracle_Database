@@ -49,8 +49,8 @@ On Host
         recover database until available redo;
 
       SQL
-        alter system set "_allow_resetlogs_corruption"=true scope=spfile;
-        recover database using backup controlfile until cancel;
-        startup force;
+        (alter system set "_allow_resetlogs_corruption"=true scope=spfile;)
+        (recover database using backup controlfile until cancel;)
+        (startup force;)
         alter database open resetlogs;
            
