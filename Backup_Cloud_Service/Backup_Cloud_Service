@@ -36,12 +36,12 @@ On Host
         SET DBID=       ;
         run {
         ALLOCATE CHANNEL t1 DEVICE TYPE sbt PARMS 'SBT_LIBRARY=libopc.so ENV=(OPC_PFILE=/tmp/oracle/database/dbhome/dbs/opcorcl.ora)';
-        RESTORE SPFILE TO PFILE '/tmp/oracle/database/dbhome/dbs/initorcl.ora' FROM 'c-1593232515-20210226-00';
+        RESTORE SPFILE TO PFILE '/tmp/oracle/database/dbhome/dbs/initorcl.ora' FROM 'c-1593232515-20210301-00';
         }
 
         run {
         ALLOCATE CHANNEL t1 DEVICE TYPE sbt PARMS 'SBT_LIBRARY=libopc.so ENV=(OPC_PFILE=/tmp/oracle/database/dbhome/dbs/opcorcl.ora)';
-        RESTORE CONTROLFILE FROM 'c-1593232515-20210226-00';
+        RESTORE CONTROLFILE FROM 'c-1593232515-20210301-00';
         }
       
         alter database mount;
