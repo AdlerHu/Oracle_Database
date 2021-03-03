@@ -45,9 +45,10 @@ On Host
         recover database until available redo;
         alter database open resetlogs;
 
-      SQL
-        (alter system set "_allow_resetlogs_corruption"=true scope=spfile;)
-        (recover database using backup controlfile until cancel;)
-        (alter database open resetlogs;)
-        (startup force;)
+      ORA-01152
+        SQL
+          (alter system set "_allow_resetlogs_corruption"=true scope=spfile;)
+          (recover database using backup controlfile until cancel;)
+          (alter database open resetlogs;)
+          (startup force;)
         
