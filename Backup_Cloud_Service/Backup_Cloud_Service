@@ -15,16 +15,16 @@ On Host
   RMAN
     Configure
       CONFIGURE CONTROLFILE AUTOBACKUP ON;
-      CONFIGURE CHANNEL DEVICE TYPE sbt PARMS='SBT_LIBRARY=/tmp/oracle/database/dbhome/lib/libopc.so, SBT_PARMS=(OPC_PFILE=/tmp/oracle/database/dbhome/dbs/opcorcl.ora)';
+      CONFIGURE CHANNEL DEVICE TYPE sbt PARMS='SBT_LIBRARY=/u01/app/oracle/product/19.0.0/dbhome_1/lib/libopc.so, SBT_PARMS=(OPC_PFILE=/u01/app/oracle/product/19.0.0/dbhome_1/dbs/opcorcl.ora)';
       CONFIGURE COMPRESSION ALGORITHM 'MEDIUM';    
       CONFIGURE DEVICE TYPE sbt BACKUP TYPE TO COMPRESSED BACKUPSET;
     
     Backup
-      SET ENCRYPTION ON IDENTIFIED BY 'my_pswd' ONLY;
+      SET ENCRYPTION ON IDENTIFIED BY '!QAZ2wsx#EDC' ONLY;
       BACKUP DEVICE TYPE sbt DATABASE;
     
     Restore
-      SET DECRYPTION IDENTIFIED BY 'my_pswd';
+      SET DECRYPTION IDENTIFIED BY '!QAZ2wsx#EDC';
       RESTORE DATABASE;
       RECOVER DATABASE;
       
@@ -35,8 +35,8 @@ On Host
         SET DECRYPTION IDENTIFIED BY 'my_bkup_pwd';
         SET DBID=       ;
         run {
-        ALLOCATE CHANNEL t1 DEVICE TYPE sbt PARMS 'SBT_LIBRARY=libopc.so ENV=(OPC_PFILE=/tmp/oracle/database/dbhome/dbs/opcorcl.ora)';
-        RESTORE SPFILE TO PFILE '/tmp/oracle/database/dbhome/dbs/initorcl.ora' FROM 'c-1593232515-20210301-00';
+        ALLOCATE CHANNEL t1 DEVICE TYPE sbt PARMS 'SBT_LIBRARY=libopc.so ENV=(OPC_PFILE=/u01/app/oracle/product/19.0.0/dbhome_1/dbs/opcorcl.ora)';
+        RESTORE SPFILE TO PFILE '/u01/app/oracle/product/19.0.0/dbhome_1/dbs/initorcl.ora' FROM 'c-1593232515-20210301-00';
         RESTORE CONTROLFILE FROM 'c-1593232515-20210301-00';
         alter database mount;
         }      
